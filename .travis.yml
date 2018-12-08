@@ -1,0 +1,17 @@
+language: ruby
+
+os: osx
+
+matrix:
+  include:
+    - osx_image: xcode10.1
+      env: OSX_VERSION=10.13
+
+install:
+  - brew update
+  - softwareupdate --list
+  - softwareupdate --install "Command Line Tools (macOS High Sierra version 10.13) for Xcode-10.1"
+
+script:
+  - brew audit --strict ./*.rb
+  - brew install --verbose --build-bottle --HEAD ./*.rb
